@@ -11,7 +11,7 @@ import dash_table
 
 #app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 fig = go.Figure()
