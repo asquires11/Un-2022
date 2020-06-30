@@ -48,7 +48,7 @@ app.layout = html.Div(
         html.Div([
             html.Br(),
             html.H3('COVID-19 AND EDUCATION',
-                    style={'color': '#7fafdf', 'margin-left': '5%', 'fontFamily': 'Playfair Display'},className='app-header--title')
+                    style={'color': '#7fafdf', 'margin-left': '5%'},className='app-header--title')
 
         ]),
 
@@ -67,12 +67,13 @@ app.layout = html.Div(
                                          children=[
 
                                              dbc.Tab(tab_id="tab_1", label="Country",
-                                                     style={'fontFamily': 'HelveticaNeue', 'color': "#7fafdf"},
+                                                     style={#'fontFamily': 'Helvetica Neue',
+                                                            'color': "#7fafdf"},
                                                      children=[
                                                          dbc.Container([
                                                              html.Br(),
                                                              html.H5('Choose a Country:',
-                                                                     style={'fontFamily': 'Open Sans',
+                                                                     style={
                                                                             'color': "#7fafdf", 'margin-left': '5%'}),
                                                              html.Br(),
                                                              html.Div(style={'fontColor': '#7fafdf'}, children=
@@ -91,16 +92,16 @@ app.layout = html.Div(
 
                                                                       ),
                                                              html.Br(),
-                                                             html.H5('Choose a Graph: ', style={'fontFamily': 'Open Sans',
-                                                                            'color': "#7fafdf", 'margin-left': '5%'}),
+                                                             html.H5('Choose a Graph: ',# style={'fontFamily': '',
+                                                                            style= {'color': "#7fafdf", 'margin-left': '5%'}),
 
 dcc.RadioItems(
     options=[
-        {'label': 'New York City', 'value': 'NYC'},
-        {'label': 'Montréal', 'value': 'MTL'},
-        {'label': 'San Francisco', 'value': 'SF'}
+        {'label': 'Date', 'value': 'DT'},
+        {'label': 'Bigrams', 'value': 'BG'},
+        {'label': 'Ngrams', 'value': 'NG'}
     ],
-    value='MTL'
+    value='DT', style={'color':'#7fafdf'}
 ),
 
                                                              html.Br(),
@@ -117,7 +118,8 @@ dcc.RadioItems(
 
                                                      html.Br(),
                                                      html.H5("Top 20 Hashtags:",
-                                                            style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf',
+                                                            style={#'fontFamily': 'HelveticaNeue',
+                                                                   'color': '#7fafdf',
                                                                    'margin-left': '5%'}),
                                                      html.Br(),
                                                      html.Div(
@@ -128,7 +130,7 @@ dcc.RadioItems(
                                                  ], fluid=True)
                                              ])
                                          ])
-                            ], style={'backgroundColor': '#252e3f', 'height': '650px', 'fontFamily': 'HelveticaNeue',
+                            ], style={'backgroundColor': '#252e3f', 'height': '650px', #'fontFamily': 'HelveticaNeue',
                                       'fontColor': '#7fafdf'},
 
                             ), style={'backgroundColor': '#252e3f', 'height': '690px', 'margin-left': '5%'}),
@@ -171,10 +173,12 @@ def update_graph(value):
     fig.update_traces(mode='lines+markers', line_color='#7fafdf')#'#2cfec1')
 
     fig.update_xaxes(showgrid=True, gridcolor='#5b5b5b',
-                     tickfont=dict(family='HelveticaNeue', color='#7fafdf', size=14))
+                     tickfont=dict(#family='Helvetica Neue',
+                                   
+                                   color='#7fafdf', size=14))
 
     fig.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
-                     tickfont=dict(family='HelveticaNeue', color='#7fafdf', size=14))
+                     tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
 
     fig.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom',
                        xref='paper', yref='paper', showarrow=False, align='left',
@@ -182,7 +186,7 @@ def update_graph(value):
 
     fig.update_layout(height=650, margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
                       paper_bgcolor='#1f2630', title_text='Compound Sentiment of Tweets by Date', title_x=0.5,
-                      font=dict(family='HelveticaNeue',
+                      font=dict(family='Helvetica Neue',
                                 size=12,
                                 color='#7fafdf'), xaxis_title='Date',
                       yaxis_title='Compound Sentiment Score')
@@ -215,7 +219,7 @@ def update_table(value):
         fixed_rows={'headers': True},
         style_table=dict(overflowX='auto', minWidth='100%'),
         style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
-                    'fontFamily':'Arial'}
+                    'fontFamily':'Helvetica Neue'}
     ))
     #page_size=50
 
