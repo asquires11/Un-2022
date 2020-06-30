@@ -77,7 +77,10 @@ app.layout = html.Div(
                                                                         'fontColor': '#7fafdf',
                                                                         'font': {'color': 'white'}}
                                                              ),
+
                                                                       ),
+                                                             html.Br(),
+                                                             html.Div( id='Table'),
                                                              html.Br(),
 
                                                              html.Div(id='output-panel',
@@ -93,10 +96,10 @@ app.layout = html.Div(
                                                             style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf',
                                                                    'margin-left': '5%'}),
                                                      html.Br(),
-                                                     html.Div(
-                                                         id='Table',
+                                                    # html.Div(
+                                                         #id='Table',
 
-                                                     )
+                                                   #  )
 
                                                  ], fluid=True)
                                              ])
@@ -141,13 +144,13 @@ def update_graph(value):
 
     fig = px.line(dff, x='date', y='compound')
 
-    fig.update_traces(mode='lines+markers', line_color='#2cfec1')
+    fig.update_traces(mode='lines+markers', line_color='#7fafdf')#'#2cfec1')
 
     fig.update_xaxes(showgrid=True, gridcolor='#5b5b5b',
-                     tickfont=dict(family='HelveticaNeue', color='#2cfec1', size=14))
+                     tickfont=dict(family='HelveticaNeue', color='#7fafdf', size=14))
 
     fig.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
-                     tickfont=dict(family='HelveticaNeue', color='#2cfec1', size=14))
+                     tickfont=dict(family='HelveticaNeue', color='#7fafdf', size=14))
 
     fig.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom',
                        xref='paper', yref='paper', showarrow=False, align='left',
@@ -157,7 +160,7 @@ def update_graph(value):
                       paper_bgcolor='#1f2630', title_text='Compound Sentiment of Tweets by Date', title_x=0.5,
                       font=dict(family='HelveticaNeue',
                                 size=12,
-                                color='#2cfec1'), xaxis_title='Date',
+                                color='#7fafdf'), xaxis_title='Date',
                       yaxis_title='Compound Sentiment Score')
 
     return fig
@@ -187,7 +190,7 @@ def update_table(value):
         data=dft.to_dict('records'),
         fixed_rows={'headers': True},
         style_table=dict(overflowX='auto', minWidth='100%'),
-        style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto','backgroundColor':'#1f2630','textAlign':'center'}
+        style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center'}
     ))
     #page_size=50
 
