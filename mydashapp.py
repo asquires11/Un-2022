@@ -27,6 +27,17 @@ top_hashtag = pd.read_csv(
 
 sentiment_scores = pd.read_csv(
     'sentiment_scores.csv')
+dcc.RadioItems(
+    options=[
+            {'label': 'Date', 'value': 'DT'},
+            {'label': 'Bigrams', 'value': 'BG'},
+            {'label': 'Frequency', 'value': 'FQ'}
+        ],
+    value='DT'
+
+),
+
+
 
 # build app
 # _________________________________________________
@@ -80,7 +91,20 @@ app.layout = html.Div(
 
                                                                       ),
                                                              html.Br(),
-                                                             html.Div( id='Table'),
+                                                             html.H5('Choose a Graph: ', style={'fontFamily': 'Open Sans',
+                                                                            'color': "#7fafdf", 'margin-left': '5%'}),
+
+dcc.RadioItems(
+    options=[
+        {'label': 'New York City', 'value': 'NYC'},
+        {'label': 'Montréal', 'value': 'MTL'},
+        {'label': 'San Francisco', 'value': 'SF'}
+    ],
+    value='MTL'
+),
+
+                                                             html.Br(),
+
                                                              html.Br(),
 
                                                              html.Div(id='output-panel',
@@ -96,10 +120,10 @@ app.layout = html.Div(
                                                             style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf',
                                                                    'margin-left': '5%'}),
                                                      html.Br(),
-                                                    # html.Div(
-                                                         #id='Table',
+                                                     html.Div(
+                                                         id='Table',
 
-                                                   #  )
+                                                     )
 
                                                  ], fluid=True)
                                              ])
@@ -190,7 +214,8 @@ def update_table(value):
         data=dft.to_dict('records'),
         fixed_rows={'headers': True},
         style_table=dict(overflowX='auto', minWidth='100%'),
-        style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center'}
+        style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
+                    'fontFamily':'Arial'}
     ))
     #page_size=50
 
