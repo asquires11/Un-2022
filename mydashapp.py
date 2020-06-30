@@ -89,9 +89,10 @@ app.layout = html.Div(
                                                  dbc.Container([
 
                                                      html.Br(),
-                                                     html.P("Top 20 Hashtags:",
+                                                     html.H5("Top 20 Hashtags:",
                                                             style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf',
                                                                    'margin-left': '5%'}),
+                                                     html.Br(),
                                                      html.Div(
                                                          id='Table',
 
@@ -177,14 +178,20 @@ def tab_resources(click):
     [Input('demo-dropdown', 'value')])
 def update_table(value):
     dft = top_hashtag[top_hashtag['Country'] == value]
+    dft= dft.iloc[:,:2]
+    dft=dft.rename(columns={' Number of Appearances': 'Frequency'})
     return html.Div(dash_table.DataTable(
         id='Table',
 
         columns=[{'id': c, 'name': c} for c in dft.columns],
-
-        page_size=50
-
+        data=dft.to_dict('records'),
+        fixed_rows={'headers': True},
+        style_table=dict(overflowX='auto', minWidth='100%'),
+        style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto','backgroundColor':'#1f2630','textAlign':'center'}
     ))
+    #page_size=50
+
+   # ))
 
 
 
