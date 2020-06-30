@@ -9,8 +9,6 @@ import plotly.express as px
 import numpy as np
 import dash_table
 
-#app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
-
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
@@ -39,7 +37,7 @@ app.layout = html.Div(
         html.Div([
             html.Br(),
             html.H3('COVID-19 AND EDUCATION',
-                    style={'color': '#7fafdf', 'margin-left': '5%', 'fontFamily': 'Playfair Display'})
+                    style={'color': '#7fafdf', 'margin-left': '5%', 'fontFamily': 'Playfair Display'},className='app-header--title')
 
         ]),
 
@@ -57,7 +55,7 @@ app.layout = html.Div(
 
                                          children=[
 
-                                             dbc.Tab(tab_id="tab_1", label="Tab 1",
+                                             dbc.Tab(tab_id="tab_1", label="Country",
                                                      style={'fontFamily': 'HelveticaNeue', 'color': "#7fafdf"},
                                                      children=[
                                                          dbc.Container([
@@ -189,33 +187,7 @@ def update_table(value):
     ))
 
 
-@app.callback(
-    dash.dependencies.Output("output-panel", "children"),
-    [dash.dependencies.Input('demo-dropdown', 'value')])
-def render_output_panel(value):
-    df_sent = sentiment_scores[sentiment_scores['country'] == value]
-    panel = html.Div(dbc.Card(dbc.CardBody([
-        html.H4(df_sent['Place'][:1], style={'fontFamily': 'Playfair Display', 'color': "#7fafdf"}),
-        dbc.Card(  # body=True, className="text-white bg-primary",
-            dbc.CardBody(children=[
 
-                html.H6("Overall Sentiment Average:", style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf'}),
-                html.H3(df_sent['Compound'], style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf'}),
-
-                html.H6("Positive Sentiment Average:", style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf'}),
-                html.H3(df_sent['Positive'], style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf'}),
-
-                html.H6("Neutral Sentiment Average :", style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf'}),
-                html.H3(df_sent['Neutral'], style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf'}),
-
-                html.H6("Negative Sentiment Average:", style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf'}),
-                html.H3(df_sent['Negative'], style={'fontFamily': 'HelveticaNeue', 'color': '#7fafdf'})
-
-            ], style={'backgroundColor': '#1f2630', 'height': '400px'}), style={'backgroundColor': '#1f2630'})])),
-        style={'backgroundColor': '#1f2630'}
-    )
-
-    return panel
 
 
 # run app
