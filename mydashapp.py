@@ -137,11 +137,22 @@ dcc.RadioItems(
                         dbc.CardBody([
                             
                                 
-                             html.Img(
-                src=app.get_asset_url("Rplot03.png"),),  
+                             #html.Img(
+                #src=app.get_asset_url("Rplot03.png"),),  
+                            #html.Br(),
+                            
+                            
+                            #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
+                            
+                            
                             html.Br(),
-                            dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
-                            html.Br()
+                            
+                             dbc.Tabs(className="nav nav-pills", children=[
+                                        dbc.Tab(dcc.Graph(id="sentiment-dates",style={'backgroundColor': '#fdfe2', 'height': '650px'}), label="Total cases"),
+                                        dbc.Tab( html.Img(
+                src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases")]),
+                            #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
+                            html.Br(),
                            # html.Iframe(id='map', srcDoc=open(
                                 #'/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/
                                 #'D5_LM.html',
