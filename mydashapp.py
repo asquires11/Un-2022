@@ -138,7 +138,7 @@ dcc.RadioItems(
                             
                                 
                              html.Img(
-                src=app.get_asset_url("Rplot03.png")),  
+                src=app.get_asset_url("Rplot03.png"),),  
                             html.Br(),
                             dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                             html.Br()
