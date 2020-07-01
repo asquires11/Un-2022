@@ -15,19 +15,14 @@ server = app.server
 fig = go.Figure()
 
 
+df=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Results/Vader_results_1.csv')
+
+df=df.rename(columns={'Unnamed: 0':'thing'})
+
+df_date=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Results/US_COMPOUND_SENTIMENT_AND_DATE.csv')
+
+top_hashtag=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/tophashtag.csv')
 #######vader results
-df = pd.read_csv('Vader_results_1.csv')
-
-df = df.rename(columns={'Unnamed: 0': 'thing'})
-
-df_date = pd.read_csv(
-    'US_COMPOUND_SENTIMENT_AND_DATE.csv')
-top_hashtag = pd.read_csv(
-    'tophashtag.csv')
-
-sentiment_scores = pd.read_csv(
-    'sentiment_scores.csv')
-
 
 
 # build app
@@ -91,17 +86,6 @@ app.layout = html.Div(
                                                              html.H5('Choose a Graph: ',# style={'fontFamily': '',
                                                                             style= {'color': "#7fafdf", 'margin-left': '5%'}),
 
-dcc.RadioItems(
-    options=[
-        {'label': 'Date', 'value': 'DT'},
-        {'label': 'Bigrams', 'value': 'BG'},
-        {'label': 'Ngrams', 'value': 'NG'}
-    ],
-    value='DT', style={'color':'#7fafdf'}
-),
-
-                                                             html.Br(),
-
                                                              html.Br(),
 
                                                              html.Div(id='output-panel',
@@ -150,9 +134,13 @@ dcc.RadioItems(
                              dbc.Tabs(className="nav nav-pills", children=[
                                         dbc.Tab(dcc.Graph(id="sentiment-dates",style={'backgroundColor': '#fdfe2', 'height': '650px'}), label="Total cases"),
                                         dbc.Tab( html.Img(
-                src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases")]),
+                src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases"),
+                                  dbc.Tab( html.Img(
+                src=app.get_asset_url('Rplot05.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
+                             ]),
                             #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                             html.Br(),
+                            
                            # html.Iframe(id='map', srcDoc=open(
                                 #'/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/
                                 #'D5_LM.html',
