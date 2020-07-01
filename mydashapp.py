@@ -14,28 +14,24 @@ server = app.server
 
 fig = go.Figure()
 
-# vader results
+
+#######vader results
 df = pd.read_csv('Vader_results_1.csv')
 
 df = df.rename(columns={'Unnamed: 0': 'thing'})
 
 df_date = pd.read_csv(
     'US_COMPOUND_SENTIMENT_AND_DATE.csv')
-
 top_hashtag = pd.read_csv(
     'tophashtag.csv')
 
 sentiment_scores = pd.read_csv(
     'sentiment_scores.csv')
-dcc.RadioItems(
-    options=[
-            {'label': 'Date', 'value': 'DT'},
-            {'label': 'Bigrams', 'value': 'BG'},
-            {'label': 'Frequency', 'value': 'FQ'}
-        ],
-    value='DT'
 
-),
+
+
+# build app
+# _________________________________________________
 
 
 
@@ -139,12 +135,17 @@ dcc.RadioItems(
 
                     dbc.Col(html.Div(dbc.Card(
                         dbc.CardBody([
-                            dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
+                            
+                                
+                             html.Img(
+                src=app.get_asset_url("Rplot03.png"),),  
                             html.Br(),
-                            html.Iframe(id='map', srcDoc=open(
+                            dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
+                            html.Br()
+                           # html.Iframe(id='map', srcDoc=open(
                                 #'/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/
-                                'D5_LM.html',
-                                'r').read(),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),
+                                #'D5_LM.html',
+                               #'r').read(),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),
 
                         ]), style={'backgroundColor': '#252e3f'}
 
@@ -209,7 +210,6 @@ def tab_resources(click):
 
 
 @app.callback(
-
     Output('Table', 'children'),
     [Input('demo-dropdown', 'value')])
 def update_table(value):
