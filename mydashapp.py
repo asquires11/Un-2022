@@ -140,6 +140,11 @@ dcc.RadioItems(
                     dbc.Col(html.Div(dbc.Card(
                         dbc.CardBody([
                             dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
+                            html.Br(),
+                            html.Iframe(id='map', srcDoc=open(
+                                #'/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/
+                                'D5_LM.html',
+                                'r').read(),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),
 
                         ]), style={'backgroundColor': '#252e3f'}
 
