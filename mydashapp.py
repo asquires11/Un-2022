@@ -91,11 +91,7 @@ app.layout = html.Div(
 
                                                                       ),
                                                              html.Br(),
-                                                             html.H5('Choose a Graph: ',# style={'fontFamily': '',
-                                                                            style= {'color': "#7fafdf", 'margin-left': '5%'}),
-
-                                                             html.Br(),
-
+                                                            
                                                              html.Div(id='output-panel',
                                                                       style={'backgroundColor': '#1f2630'}),
 
