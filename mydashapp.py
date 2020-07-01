@@ -142,9 +142,9 @@ app.layout = html.Div(
                              dbc.Tabs(className="nav nav-pills", children=[
                                         dbc.Tab(dcc.Graph(id="sentiment-dates",style={'backgroundColor': '#fdfe2', 'height': '650px'}), label="Total cases"),
                                         dbc.Tab( html.Img(
-                src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases"),
+                src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases"),
                                   dbc.Tab( html.Img(
-                src=app.get_asset_url('Rplot05.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
+                src=app.get_asset_url('Rplot05.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
                              ]),
                             #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                             html.Br(),
