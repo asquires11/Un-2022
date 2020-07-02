@@ -140,9 +140,9 @@ app.layout = html.Div(
                         dbc.CardBody([
                             
                                 
-                             #html.Img(
+                            # html.Img(
                 #src=app.get_asset_url("Rplot03.png"),),  
-                            #html.Br(),
+                           # html.Br(),
                             
                             
                             #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
@@ -151,12 +151,12 @@ app.layout = html.Div(
                             html.Br(),
                             
                              dbc.Tabs(className="nav nav-pills", children=[
-                                        dbc.Tab(dcc.Graph(id="sentiment-dates",style={'backgroundColor': '#fdfe2', 'height': '650px'}), label="Total cases"),
+                                        dbc.Tab(dcc.Graph(id="sentiment-dates",style={'backgroundColor': '#fdfe2', 'height': '650px'}), label="Dates"),
                                         dbc.Tab(dcc.Graph(id='bigrams',style={'backgroundColor': '#fdfe2', 'height': '650px'}),label='Bigrams')
-                                        #dbc.Tab( html.Img(
-                #src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases"),
-                                  #dbc.Tab( html.Img(
-                #src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
+                                        dbc.Tab( html.Img(
+                src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Network Correlations"),
+                                  dbc.Tab( html.Img(
+                src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
                              ]),
                             #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                             html.Br(),
