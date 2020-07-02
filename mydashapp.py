@@ -33,7 +33,7 @@ sentiment_scores = pd.read_csv(
 
 states = top_hashtag.Country.unique().tolist()
 
-bigrams=pd.read('bigrams.csv')
+bigrams=pd.read_csv('bigrams.csv')
 
 
 
