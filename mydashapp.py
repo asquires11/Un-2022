@@ -14,16 +14,22 @@ server = app.server
 
 fig = go.Figure()
 
-df=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Results/Vader_results_1.csv')
 
-df=df.rename(columns={'Unnamed: 0':'thing'})
 
-df_date=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Results/US_COMPOUND_SENTIMENT_AND_DATE.csv')
 
-#top_hashtag=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/tophashtag.csv')
-#######vader results
+# vader results
+df = pd.read_csv('Vader_results_1.csv')
 
-top_hashtag=pd.read_csv('/Users/annikasquires/PycharmProjects/untitled/my_unicef/tophashtag.csv')
+df = df.rename(columns={'Unnamed: 0': 'thing'})
+
+df_date = pd.read_csv(
+    'US_COMPOUND_SENTIMENT_AND_DATE.csv')
+
+top_hashtag = pd.read_csv(
+    'tophashtag.csv')
+
+sentiment_scores = pd.read_csv(
+    'sentiment_scores.csv')
 
 states = top_hashtag.Country.unique().tolist()
 
