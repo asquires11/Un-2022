@@ -14,7 +14,6 @@ server = app.server
 
 fig = go.Figure()
 
-
 df=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Results/Vader_results_1.csv')
 
 df=df.rename(columns={'Unnamed: 0':'thing'})
