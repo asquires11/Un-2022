@@ -33,11 +33,10 @@ sentiment_scores = pd.read_csv(
 
 states = top_hashtag.Country.unique().tolist()
 
+bigrams=pd.read('bigrams.csv')
 
 
 
-# build app
-# _________________________________________________
 
 
 
@@ -153,14 +152,16 @@ app.layout = html.Div(
                             
                              dbc.Tabs(className="nav nav-pills", children=[
                                         dbc.Tab(dcc.Graph(id="sentiment-dates",style={'backgroundColor': '#fdfe2', 'height': '650px'}), label="Total cases"),
-                                        dbc.Tab( html.Img(
-                src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases"),
-                                  dbc.Tab( html.Img(
-                src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
+                                        dbc.Tab(dcc.Graph(id='bigrams',style={'backgroundColor': '#fdfe2', 'height': '650px'}),label='Bigrams')
+                                        #dbc.Tab( html.Img(
+                #src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases"),
+                                  #dbc.Tab( html.Img(
+                #src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
                              ]),
                             #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                             html.Br(),
                                 html.Div(
+                                
    #children=[
    # dcc.Dropdown(
          #   id='filter_dropdown',
@@ -213,9 +214,9 @@ def update_graph(value):
     fig.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
                      tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
 
-    fig.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom',
-                       xref='paper', yref='paper', showarrow=False, align='left',
-                       bgcolor='rgba(0, 0,0,0)')
+    #fig.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom',
+                     #  xref='paper', yref='paper', showarrow=False, align='left',
+                     #  bgcolor='rgba(0, 0,0,0)')
 
     fig.update_layout(height=650, margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
                       paper_bgcolor='#1f2630', title_text='Compound Sentiment of Tweets by Date', title_x=0.5,
@@ -255,6 +256,41 @@ def update_table(value):
     ))
     
 
+@app.callback(
+    dash.dependencies.Output('bigrams', 'figure'),
+    [dash.dependencies.Input('demo-dropdown', 'value')])
+
+
+def update_graph(value):
+    df6 = bigrams[bigrams['Country'] == value]
+    fig_3 = px.bar(df6[:20], x='Name', y='weight', title='Counts of top bigrams',  labels={'Name': 'Bigram', 'weight': 'Count'})
+
+    fig_3.update_traces(marker_color='#7fafdf')
+    
+    fig_3.update_xaxes(showgrid=True, gridcolor='#5b5b5b',
+                     tickfont=dict(family='Helvetica Neue',
+                                   
+                                   color='#7fafdf', size=14))
+    fig_3.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
+                     tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
+    
+    
+    
+    fig_3.update_layout(height=650, margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
+                      paper_bgcolor='#1f2630', title_text='Top Bigram Occurence', title_x=0.5,
+                      font=dict(family='Helvetica Neue',
+                                size=12,
+                                color='#7fafdf'), xaxis_title='Bigram',
+                      yaxis_title='Frequency')
+    
+    
+    #fig_3.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom',
+                   #    xref='paper', yref='paper', showarrow=False, align='left',
+                    #  bgcolor='rgba(0, 0,0,0)')
+
+    
+   
+    return fig_3
 
 
 
