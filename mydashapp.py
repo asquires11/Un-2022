@@ -15,22 +15,20 @@ server = app.server
 fig = go.Figure()
 
 
+df=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Results/Vader_results_1.csv')
 
-# vader results
-df = pd.read_csv('Vader_results_1.csv')
+df=df.rename(columns={'Unnamed: 0':'thing'})
 
-df = df.rename(columns={'Unnamed: 0': 'thing'})
+df_date=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Results/US_COMPOUND_SENTIMENT_AND_DATE.csv')
 
-df_date = pd.read_csv(
-    'US_COMPOUND_SENTIMENT_AND_DATE.csv')
+#top_hashtag=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/tophashtag.csv')
+#######vader results
+
+top_hashtag=pd.read_csv('/Users/annikasquires/PycharmProjects/untitled/my_unicef/tophashtag.csv')
+
+states = top_hashtag.Country.unique().tolist()
 
 
-
-sentiment_scores = pd.read_csv(
-    'sentiment_scores.csv')
-
-top_hashtag = pd.read_csv(
-    'tophashtag.csv')
 
 
 # build app
@@ -107,7 +105,20 @@ app.layout = html.Div(
                                                                    'margin-left': '5%'}),
                                                      html.Br(),
                                                      html.Div(
-                                                         id='Table',
+                                                         #id='Table',
+                                                         
+                                                          children=[
+    #dcc.Dropdown(
+           # id='filter_dropdown',
+           # options=[{'label':st, 'value':st} for st in states],
+           # value = states[0]
+           # ),
+    dt.DataTable(id='table-container', columns=[{'id': c, 'name': c} for c in top_hashtag.columns.values],fixed_rows={'headers': True},
+        style_table=dict(overflowX='auto', minWidth='100%'),
+        style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
+                    'fontFamily':'Helvetica Neue'}
+                 )
+ ]
 
                                                      )
 
@@ -144,11 +155,19 @@ app.layout = html.Div(
                              ]),
                             #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                             html.Br(),
+                                html.Div(
+   #children=[
+   # dcc.Dropdown(
+         #   id='filter_dropdown',
+          #  options=[{'label':st, 'value':st} for st in states],
+          #  value = states[0]
+          #  ),
+  #  dt.DataTable(id='table-container', columns=[{'id': c, 'name': c} for c in top_hashtag.columns.values],style_table=dict(overflowX='auto', minWidth='100%',style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
+                   # 'fontFamily':'Helvetica Neue'}))
+# ]
+                                    ),
                             
-                           # html.Iframe(id='map', srcDoc=open(
-                                #'/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/
-                                #'D5_LM.html',
-                               #'r').read(),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),
+                           
 
                         ]), style={'backgroundColor': '#252e3f'}
 
@@ -229,9 +248,18 @@ def update_table(value):
         style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
                     'fontFamily':'Helvetica Neue'}
     ))
-    #page_size=50
+    
 
-   # ))
+
+
+
+@app.callback(
+    Output('table-container', 'data'),
+    [Input('demo-dropdown', 'value') ] )
+def display_table(Country):
+    dff_3= top_hashtag[top_hashtag.Country==Country]
+    
+    return dff_3.to_dict('records')
 
 
 
