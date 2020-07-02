@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import plotly.express as px
 import numpy as np
-import dash_table
+import dash_table as dt
 
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
