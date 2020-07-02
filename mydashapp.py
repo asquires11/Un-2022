@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import plotly.express as px
 import numpy as np
-import dash_table
+import dash_table as dt
 
 app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
@@ -15,23 +15,18 @@ server = app.server
 fig = go.Figure()
 
 
+df=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Results/Vader_results_1.csv')
 
-# vader results
-df = pd.read_csv('Vader_results_1.csv')
+df=df.rename(columns={'Unnamed: 0':'thing'})
 
-df = df.rename(columns={'Unnamed: 0': 'thing'})
+df_date=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Results/US_COMPOUND_SENTIMENT_AND_DATE.csv')
 
-df_date = pd.read_csv(
-    'US_COMPOUND_SENTIMENT_AND_DATE.csv')
+#top_hashtag=pd.read_csv('/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/tophashtag.csv')
+#######vader results
 
+top_hashtag=pd.read_csv('/Users/annikasquires/PycharmProjects/untitled/my_unicef/tophashtag.csv')
 
-
-sentiment_scores = pd.read_csv(
-    'sentiment_scores.csv')
-
-top_hashtag = pd.read_csv(
-    'tophashtag.csv')
-
+states = top_hashtag.Country.unique().tolist()
 
 # build app
 # _________________________________________________
@@ -76,22 +71,44 @@ app.layout = html.Div(
                                                                             'color': "#7fafdf", 'margin-left': '5%'}),
                                                              html.Br(),
                                                              html.Div(style={'fontColor': '#7fafdf'}, children=
-                                                             dcc.Dropdown(
-                                                                 id='demo-dropdown',
-                                                                 options=[
-                                                                     {'label': 'United States', 'value': 'US'},
-                                                                     {'label': 'China', 'value': 'CHN'}
-                                                                 ],
-                                                                 value='US',
-                                                                 style={'height': '35px', 'position': 'relative',
-                                                                        'backgroundColor': '#1f2630',
-                                                                        'fontColor': '#7fafdf',
-                                                                        'font': {'color': 'white'}}
-                                                             ),
+                                                             
+                                                                      
+                                                                      
+                                                                  dcc.Dropdown(
+            id='filter_dropdown',
+            options=[{'label':st, 'value':st} for st in states],
+            value = states[0]
+            ),    
+                                                                      
+                                                                      
+                                                                      
+                                                                      
+                                                                    #  dcc.Dropdown(
+                                                                 #id='demo-dropdown',
+                                                                 #options=[
+                                                                  #   {'label': 'United States', 'value': 'US'},
+                                                                #    # {'label': 'China', 'value': 'CHN'}
+                                                                # ],
+                                                                # value='US',
+                                                                # style={'height': '35px', 'position': 'relative',
+                                                                     #  'backgroundColor': '#1f2630',
+                                                                      #  'fontColor': '#7fafdf',
+                                                                      #  'font': {'color': 'white'}}
+                                                             #),
 
                                                                       ),
-                                                             html.Br(),
                                                             
+                                                             
+                                                             
+                                                             
+                                                             
+                                                             
+                                                             html.Br(),
+                                                             html.H5('Choose a Graph: ',# style={'fontFamily': '',
+                                                                            style= {'color': "#7fafdf", 'margin-left': '5%'}),
+
+                                                             html.Br(),
+
                                                              html.Div(id='output-panel',
                                                                       style={'backgroundColor': '#1f2630'}),
 
@@ -106,11 +123,25 @@ app.layout = html.Div(
                                                                    'color': '#7fafdf',
                                                                    'margin-left': '5%'}),
                                                      html.Br(),
-                                                     html.Div(
-                                                         id='Table',
+                                                     
+                                                     
+                                                     
+                                                     dt.DataTable(id='table-container', columns=[{'id': c, 'name': c} for c in df.columns.values],style_table=dict(overflowX='auto', minWidth='100%',style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
+                    'fontFamily':'Helvetica Neue'})),
+                                                     
+                                                     ##html.Div(
+                                                       #  id='Table',
 
-                                                     )
+                                                    # )
 
+                                                 
+                                                 
+                                                 
+                                                 
+                                                 
+                                                 
+                                                 
+                                                 
                                                  ], fluid=True)
                                              ])
                                          ])
@@ -138,12 +169,23 @@ app.layout = html.Div(
                              dbc.Tabs(className="nav nav-pills", children=[
                                         dbc.Tab(dcc.Graph(id="sentiment-dates",style={'backgroundColor': '#fdfe2', 'height': '650px'}), label="Total cases"),
                                         dbc.Tab( html.Img(
-                src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases"),
+                src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Active cases"),
                                   dbc.Tab( html.Img(
-                src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
+                src=app.get_asset_url('Rplot05.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'650'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
                              ]),
                             #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                             html.Br(),
+                            html.Div(
+   # children=[
+    #dcc.Dropdown(
+            #id='filter_dropdown',
+           # options=[{'label':st, 'value':st} for st in states],
+           # value = states[0]
+           # ),
+   # dt.DataTable(id='table-container', columns=[{'id': c, 'name': c} for c in top_hashtag.columns.values],style_table=dict(overflowX='auto', minWidth='100%',style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
+                 ##   'fontFamily':'Helvetica Neue'}))
+ #]
+),
                             
                            # html.Iframe(id='map', srcDoc=open(
                                 #'/Users/annikasquires/Desktop/COVID 19/UNICEF SENTIMENT /United States/Master/R_UNICEF/
@@ -217,24 +259,28 @@ def tab_resources(click):
     [Input('demo-dropdown', 'value')])
 def update_table(value):
     dft = top_hashtag[top_hashtag['Country'] == value]
-    dft= dft.iloc[:,:2]
-    dft=dft.rename(columns={' Number of Appearances': 'Frequency'})
+    dfc= dft.iloc[:,:2]
+    dfc=dfc.rename(columns={' Number of Appearances': 'Frequency'})
     return html.Div(dash_table.DataTable(
         id='Table',
 
-        columns=[{'id': c, 'name': c} for c in dft.columns],
-        data=dft.to_dict('records'),
+        columns=[{'id': c, 'name': c} for c in dfc.columns],
+        data=dfc.to_dict('records'),
         fixed_rows={'headers': True},
         style_table=dict(overflowX='auto', minWidth='100%'),
         style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
                     'fontFamily':'Helvetica Neue'}
     ))
-    #page_size=50
-
-   # ))
 
 
 
+
+@app.callback(
+    Output('table-container', 'data'),
+    [Input('filter_dropdown', 'value') ] )
+def display_table(Country):
+    dff_3= top_hashtag[top_hashtag.Country==Country]
+    return dff_3.to_dict('records')
 
 
 # run app
