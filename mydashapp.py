@@ -161,8 +161,12 @@ app.layout = html.Div(
                                         dbc.Tab(dcc.Graph(id='bigrams',style={'backgroundColor': '#fdfe2', 'height': '650px'}),label='Bigrams'),
                                         dbc.Tab(html.Img(
                 src=app.get_asset_url("Rplot03.png"),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Network Correlations"),
-                                  dbc.Tab( html.Img(
-                src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
+                                  #dbc.Tab( html.Img(
+                #src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
+                              dbc.Tab(html.Iframe(
+                                    id='sentiment',
+                                    srcDoc=open("assets/test_plot.html", 'r').read(), width='100%', height='600'),label="Sentiment"),
+   
                              ]),
                             #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                             html.Br(),
