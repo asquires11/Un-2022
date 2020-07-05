@@ -119,7 +119,8 @@ app.layout = html.Div(
            # options=[{'label':st, 'value':st} for st in states],
            # value = states[0]
            # ),
-    dt.DataTable(id='table-container', columns=[{'id': c, 'name': c} for c in top_hashtag.columns.values],fixed_rows={'headers': True},
+    dt.DataTable(id='table-container',columns=[{'id': c, 'name': c} for c in
+        top_hashtag.columns[:2].values],fixed_rows={'headers': True},
         style_table=dict(overflowX='auto', minWidth='100%'),
         style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
                     'fontFamily':'Helvetica Neue'}
@@ -301,6 +302,7 @@ def update_graph(value):
     [Input('demo-dropdown', 'value') ] )
 def display_table(Country):
     dff_3= top_hashtag[top_hashtag.Country==Country]
+    dff_3 = dff_3.iloc[:, :2]
     
     return dff_3.to_dict('records')
 
