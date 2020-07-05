@@ -174,7 +174,7 @@ app.layout = html.Div(
 
                                 dbc.Tab(html.Iframe(
                                     id='active_nodes',
-                                    srcDoc=open("assets/test_plot_3.html", 'r').read(), width='100%', height='600'),
+                                    srcDoc=open("assets/co_occ.html", 'r').read(), width='100%', height='600'),
                                     label="nodes_2"),
                             #dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                             html.Br(),
