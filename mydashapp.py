@@ -31,11 +31,13 @@ df_date = pd.read_csv(
 sentiment_scores = pd.read_csv(
     'sentiment_scores.csv')
 
-states = top_hashtag.Country.unique().tolist()
 
 bigrams=pd.read_csv('bigrams.csv')
 
 top_hashtag = pd.read_csv('tophashtag_2.csv')
+
+states = top_hashtag.Country.unique().tolist()
+
 
 
 
