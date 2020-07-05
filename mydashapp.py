@@ -122,6 +122,9 @@ app.layout = html.Div(
     dt.DataTable(id='table-container',columns=[{'id': c, 'name': c} for c in
         top_hashtag.columns[:2].values],fixed_rows={'headers': True},
         style_table=dict(overflowX='auto', minWidth='100%'),
+        style_cell_conditional=[
+                                                                              {'if': {'column_id': 'Hashtag'},
+                                                                               'width': '50%'}],
         style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
                     'fontFamily':'Helvetica Neue'}
                  )
