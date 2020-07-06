@@ -207,7 +207,7 @@ app.layout = html.Div(
                                     label="nodes"),
                                 dbc.Tab(html.Iframe(
                                     id='active_nodes',
-                                    srcDoc=open("assets/co_occ.html", 'r').read(), width='100%', height='600'),
+                                    srcDoc=open("assets/yay.html", 'r').read(), width='100%', height='600'),
                                     label="Network Correlations", style={'border': '#1d2731'}, ),
 
                                 # dbc.Tab( html.Img(
