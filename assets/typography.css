@@ -864,4 +864,61 @@ div, svg {
 ._dash-undo-redo {
     display: none;
 }
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  background: #FEFFFB;
+  font-family: arial, verdana;
+}
+
+/*ADD THIS BELOW */
+iframe {
+  border: 0 ;
+}
+/*END*/
+
+#layoutContainer {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+}
+#iframeHeader {
+  width: 100%;
+  height: 50px;
+  border: 0;
+}
+#iframeStatusBar {
+  width: 100%;
+  height: 15px;
+  border: 0;
+}
+#iframeMainMenu {
+  width: 200px;
+  height: 100%;
+}
+#iframeCenterContent {
+  width: 100%;
+  height: 100%;
+  top: 65px;
+  left: 200px;
+  position: fixed;
+}
+#iframeFooter {
+  width: 100%;
+  height: 50px;
+  bottom: 0px;
+  left: 200px;
+  position: fixed;
+}
 
