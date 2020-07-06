@@ -203,12 +203,15 @@ app.layout = html.Div(
                                 # label='Bigrams'),
                                 dbc.Tab(html.Iframe(
                                     id='nodes',
-                                    srcDoc=open("assets/node_test_2.html", 'r').read(), width='100%', height='600'),
+                                    srcDoc=open("assets/node_test_2.html", 'r').read(), width='100%'),
                                     label="nodes"),
-                                dbc.Tab(html.Iframe(
-                                    id='active_nodes',
-                                    srcDoc=open("assets/yay.html", 'r').read(), width='100%', height='600'),
-                                    label="Network Correlations", style={'border': '#1d2731'}, ),
+                               
+                                dbc.Tab(html.Div([
+                                    html.Br(),
+                                    html.Iframe(
+                                    id='co-oc',
+                                    srcDoc=open("assets/yay.html", 'r').read(), width='100%',style={'height':'100rem'})]),
+                                    label="Network"),
 
                                 # dbc.Tab( html.Img(
                                 # src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
