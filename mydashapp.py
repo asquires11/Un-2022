@@ -421,7 +421,7 @@ def update_graph(value, number_dropdown):
                             annotations=[
                           go.layout.Annotation(
                               x=0,
-                              y=-.6,
+                              y=-1,
                               showarrow=False,
                               text="<br>Source: Twitter",
                               xref="paper",
@@ -452,7 +452,7 @@ def update_graph(value, number_dropdown):
                            annotations=[
                           go.layout.Annotation(
                               x=0,
-                              y=-.7,
+                              y=-1.2,
                               showarrow=False,
                               text="<br>Source: Twitter",
                               xref="paper",
