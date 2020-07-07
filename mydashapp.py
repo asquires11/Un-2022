@@ -280,7 +280,7 @@ def update_graph(value):
     #  xref='paper', yref='paper', showarrow=False, align='left',
     #  bgcolor='rgba(0, 0,0,0)')
 
-    fig.update_layout(margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
+    fig.update_layout(margin={'l': 100, 'b': 100, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
                       paper_bgcolor='#1f2630', title_text='Compound Sentiment of Tweets by Date', title_x=0.5,
                       font=dict(family='Helvetica Neue',
                                 size=12,
@@ -289,7 +289,7 @@ def update_graph(value):
                        annotations=[
                           go.layout.Annotation(
                               x=0,
-                              y=-.4,
+                              y=-.2,
                               showarrow=False,
                               text="<br>Source: Twitter",
                               xref="paper",
@@ -359,7 +359,7 @@ def update_graph(value, number_dropdown):
                             annotations=[
                           go.layout.Annotation(
                               x=0,
-                              y=-.4,
+                              y=-.3,
                               showarrow=False,
                               text="<br>Source: Twitter",
                               xref="paper",
