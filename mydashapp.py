@@ -42,8 +42,15 @@ app.layout = html.Div(
     children=[
         html.Div([
             html.Br(),
-            html.H3('COVID-19 AND EDUCATION',
-                    style={'color': '#7fafdf', 'margin-left': '5%'}, className='app-header--title')
+            html.H4('COVID-19 AND EDUCATION',
+                    style={'color': '#7fafdf', 'margin-left': '5%'}, className='app-header--title'),
+            html.P(
+                    id="description",
+                    children="† Deaths are classified using the International Classification of Diseases, \
+                    Tenth Revision (ICD–10). Drug-poisoning deaths are defined as having ICD–10 underlying \
+                    cause-of-death codes X40–X44 (unintentional), X60–X64 (suicide), X85 (homicide), or Y10–Y14 \
+                    (undetermined intent).",
+                ),
 
         ]),
 
