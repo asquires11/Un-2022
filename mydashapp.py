@@ -249,9 +249,7 @@ app.layout = html.Div(
                     )), md=9),
 
                 ]
-            )
-        ]
-       , html.Div(
+            ), html.Div(
         [
             html.H4('Acknowledgements and Data Sources',
                     style={"margin-top": "0"}),
@@ -271,7 +269,9 @@ _ Special Thanks to Moxuan Zhang for doing the computing and analysis of the Chi
             'padding': '10px',
         },
         className='twelve columns pretty_container',
-    ), ),
+    ),
+        ]
+       ),
 
     ],
     style={'backgroundColor': '#1f2630', 'width': '100%', 'height': '900px'}
