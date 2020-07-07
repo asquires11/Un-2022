@@ -386,7 +386,18 @@ def update_graph(value, number_dropdown):
                             font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
-                            yaxis_title='Frequency')
+                            yaxis_title='Frequency',
+                            annotations=[
+                          go.layout.Annotation(
+                              x=0,
+                              y=-.3,
+                              showarrow=False,
+                              text="<br>Source: Twitter",
+                              xref="paper",
+                              yref="paper",
+                              textangle=0
+                          )],
+                           )
 
     if number_dropdown == 30:
         fig_3 = px.bar(df6[:30], x='Name', y='weight', title='Counts of top bigrams',
@@ -406,7 +417,18 @@ def update_graph(value, number_dropdown):
                             font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
-                            yaxis_title='Frequency')
+                            yaxis_title='Frequency',
+                            annotations=[
+                          go.layout.Annotation(
+                              x=0,
+                              y=-.3,
+                              showarrow=False,
+                              text="<br>Source: Twitter",
+                              xref="paper",
+                              yref="paper",
+                              textangle=0
+                          )],
+                           )
 
     if number_dropdown == 40:
         fig_3 = px.bar(df6[:40], x='Name', y='weight', title='Counts of top bigrams',
@@ -426,7 +448,18 @@ def update_graph(value, number_dropdown):
                             font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
-                            yaxis_title='Frequency')
+                            yaxis_title='Frequency',
+                           annotations=[
+                          go.layout.Annotation(
+                              x=0,
+                              y=-.3,
+                              showarrow=False,
+                              text="<br>Source: Twitter",
+                              xref="paper",
+                              yref="paper",
+                              textangle=0
+                          )],
+                           )
 
     # fig_3.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom',
     #    xref='paper', yref='paper', showarrow=False, align='left',
