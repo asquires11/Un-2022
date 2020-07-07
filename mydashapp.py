@@ -285,7 +285,19 @@ def update_graph(value):
                       font=dict(family='Helvetica Neue',
                                 size=12,
                                 color='#7fafdf'), xaxis_title='Date',
-                      yaxis_title='Compound Sentiment Score')
+                      yaxis_title='Compound Sentiment Score',
+                       annotations=[
+                          go.layout.Annotation(
+                              x=0,
+                              y=-.4,
+                              showarrow=False,
+                              text="<br>Source: Twitter",
+                              xref="paper",
+                              yref="paper",
+                              textangle=0
+                          )],
+                     
+                     )
 
     return fig
 
@@ -343,7 +355,18 @@ def update_graph(value, number_dropdown):
                             font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
-                            yaxis_title='Frequency')
+                            yaxis_title='Frequency',
+                            annotations=[
+                          go.layout.Annotation(
+                              x=0,
+                              y=-.4,
+                              showarrow=False,
+                              text="<br>Source: Twitter",
+                              xref="paper",
+                              yref="paper",
+                              textangle=0
+                          )],
+                           )
 
     if number_dropdown == 20:
         fig_3 = px.bar(df6[:20], x='Name', y='weight', title='Counts of top bigrams',
