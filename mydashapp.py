@@ -19,11 +19,9 @@ df = pd.read_csv('Vader_results_1.csv')
 
 df = df.rename(columns={'Unnamed: 0': 'thing'})
 
-df_date = pd.read_csv(
-    'US_COMPOUND_SENTIMENT_AND_DATE.csv')
-
-# top_hashtag = pd.read_csv(
-# 'tophashtag.csv')
+df_date=pd.read_csv('compound_date.csv')
+#df_date = pd.read_csv(
+   # 'US_COMPOUND_SENTIMENT_AND_DATE.csv')
 
 sentiment_scores = pd.read_csv(
     'sentiment_scores.csv')
@@ -83,7 +81,8 @@ app.layout = html.Div(
                                                                  id='demo-dropdown',
                                                                  options=[
                                                                      {'label': 'United States', 'value': 'US'},
-                                                                     {'label': 'China', 'value': 'CHN'}
+                                                                     {'label': 'China', 'value': 'CHN'},
+                                                                     {'label': 'Nigeria','value':'Nigeria'},
                                                                  ],
                                                                  value='US',
                                                                  style={'height': '35px', 'position': 'relative',
