@@ -246,12 +246,32 @@ app.layout = html.Div(
 
                         ]), style={'backgroundColor': '#252e3f'}
 
-                    )), md=9)
+                    )), md=9),
 
                 ]
             )
         ]
-        ),
+       , html.Div(
+        [
+            html.H4('Acknowledgements and Data Sources',
+                    style={"margin-top": "0"}),
+            dcc.Markdown('''\
+**Important Data Caveats:**  Due to anonymized data, access to individual tweets is not available. See [FAQ](https://github.com/rapidsai/plotly-dash-rapids-census-demo/tree/master#faq-and-known-issues) for details.
+_ Special Thanks to Moxuan Zhang for doing the computing and analysis of the China data
+- Text data used with permission from Twitter and Weibo, [Twitter](https://www.twitter.com/).
+- Text analysis used Quanteda [Quanteda]
+- Network Correlation developed with [visNetwork](https://datastorm-open.github.io/visNetwork/).
+- Dashboard developed with [Plot.ly Dash](https://plotly.com/dash/).
+- For source code and data workflow, please contact [Annika Squires](annikasquires@icloud.com).
+'''),
+        ],
+        style={
+            'width': '98%',
+            'margin-right': '0',
+            'padding': '10px',
+        },
+        className='twelve columns pretty_container',
+    ), ),
 
     ],
     style={'backgroundColor': '#1f2630', 'width': '100%', 'height': '900px'}
