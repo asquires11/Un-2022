@@ -209,15 +209,15 @@ app.layout = html.Div(
                                 # label='Bigrams'),
                                 dbc.Tab(html.Iframe(
                                     id='nodes',
-                                    srcDoc=open("assets/node_test_2.html", 'r').read(), width='100%'),
+                                    src=None, width='100%'),
                                     label="nodes"),
                                
                                 dbc.Tab(html.Div([
                                     html.Br(),
                                     html.Iframe(
                                     id='co-oc',
-                                    srcDoc=open("assets/yay.html", 'r').read(), width='100%',style={'height':'100rem'})]),
-                                    label="Network"),
+                                    src=None, width='100%',style={'height':'100rem'})]),
+                                    label="Network", style=dict(border=33)),
 
                                 # dbc.Tab( html.Img(
                                 # src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
@@ -502,6 +502,30 @@ def display_table(Country):
     dff_3 = dff_3.iloc[:, :2]
 
     return dff_3.to_dict('records')
+   
+   
+
+@app.callback(Output('nodes_1', 'src'),
+                 [Input('demo-dropdown', 'value')])
+def change_video(option):
+       if option == 'US':
+           return 'assets/node_test_2.html'
+       if option == 'Nigeria':
+           return 'assets/nigeria_node_test.html'
+       else:
+           return 'https://www.youtube.com/embed/ALZHF5UqnU4'
+
+
+@app.callback(Output('co-oc', 'src'),
+                 [Input('demo-dropdown', 'value')])
+def change_video(option):
+       if option == 'US':
+           return 'assets/yay.html'
+       if option == 'Nigeria':
+           return 'assets/yay_nigeria.html'
+       else:
+           return 'https://www.youtube.com/embed/ALZHF5UqnU4'
+
 
 
 # run app
