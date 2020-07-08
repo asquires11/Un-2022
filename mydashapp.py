@@ -223,7 +223,7 @@ app.layout = html.Div(
                                 # src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
                                 dbc.Tab(html.Iframe(
                                     id='sentiment',
-                                    srcDoc=open("assets/test_plot.html", 'r').read(), width='100%', height='600'),
+                                    src=None, width='100%', height='600'),
                                     label="Sentiment", style=dict(border=33)),
 
                             ]),
@@ -523,6 +523,16 @@ def change_video(option):
            return 'assets/yay.html'
        if option == 'Nigeria':
            return 'assets/yay_nigeria.html'
+       else:
+           return 'https://www.youtube.com/embed/ALZHF5UqnU4'
+         
+@app.callback(Output('sentiment', 'src'),
+                 [Input('demo-dropdown', 'value')])
+def change_video(option):
+       if option == 'US':
+           return 'assets/test_plot_Us.html'
+       if option == 'Nigeria':
+           return 'assets/test_plot_nigeria.html'
        else:
            return 'https://www.youtube.com/embed/ALZHF5UqnU4'
 
