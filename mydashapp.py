@@ -208,7 +208,7 @@ app.layout = html.Div(
                                 # dcc.Graph(id='bigrams', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                                 # label='Bigrams'),
                                 dbc.Tab(html.Iframe(
-                                    id='nodes',
+                                    id='nodes_1',
                                     src=None, width='100%'),
                                     label="nodes"),
                                
