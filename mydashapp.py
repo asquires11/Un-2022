@@ -209,7 +209,7 @@ app.layout = html.Div(
                                 # label='Bigrams'),
                                 dbc.Tab(html.Iframe(
                                     id='nodes_1',
-                                    src=None, width='100%'),
+                                    src=None, width='100%',style={'height':'100rem'}),
                                     label="nodes"),
                                
                                 dbc.Tab(html.Div([
@@ -223,7 +223,7 @@ app.layout = html.Div(
                                 # src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
                                 dbc.Tab(html.Iframe(
                                     id='sentiment',
-                                    src=None, width='100%', style={'height'='100rem'}),
+                                    src=None, width='100%', style={'height':'100rem'}),
                                     label="Sentiment", style=dict(border=33)),
 
                             ]),
