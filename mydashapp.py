@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import plotly.graph_objects as go
 import dash_core_components as dcc
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output,State
 import pandas as pd
 import plotly.express as px
 import numpy as np
@@ -19,9 +19,9 @@ df = pd.read_csv('Vader_results_1.csv')
 
 df = df.rename(columns={'Unnamed: 0': 'thing'})
 
-df_date=pd.read_csv('compound_date.csv')
-#df_date = pd.read_csv(
-   # 'US_COMPOUND_SENTIMENT_AND_DATE.csv')
+df_date = pd.read_csv('compound_date.csv')
+# df_date = pd.read_csv(
+# 'US_COMPOUND_SENTIMENT_AND_DATE.csv')
 
 sentiment_scores = pd.read_csv(
     'sentiment_scores.csv')
@@ -40,15 +40,53 @@ app.layout = html.Div(
     children=[
         html.Div([
             html.Br(),
-            html.H4('COVID-19 AND EDUCATION',
+html.A( [(dbc.Button("About", id="open-backdrop",style={'margin-left' :'1300px'})),
+dbc.Col([ html.H4('COVID-19 AND EDUCATION',
+
                     style={'color': '#7fafdf', 'margin-left': '5%'}, className='app-header--title'),
             html.P(
-                    id="description",
-                    children="† Deaths are classified using the International Classification of Diseases, \
-                    Tenth Revision (ICD–10). Drug-poisoning deaths are defined as having ICD–10 underlying \
-                    cause-of-death codes X40–X44 (unintentional), X60–X64 (suicide), X85 (homicide), or Y10–Y14 \
-                    (undetermined intent).",
+                id="description",
+
+                children='This project is intended to study the social media sentiment \
+                from diffent countries on education during COVID-19. The initial social media data\
+                were acquired from both Twitter and Weibo. ',
+
+            ),
+
+                      ]),
+
+
+
+]),dbc.Modal(
+            [
+                dbc.ModalHeader("About this project"),
+                dbc.ModalBody(
+                    html.Div([  html.P('This project is intended to study the social media sentiment from diffent countries on education during COVID-19. The initial social media data'
+                                       'were acquired from both Twitter and Weibo. '),
+                                html.H5('Motivation'),
+                                html.P('The research objective was to understand how parents,students,teachers and schools felt about their countries implementation of distance learning, as well as examining the challenges and triumphs discussed on social media'
+                                       'that have appeared on social media sites during the pandemic. As we gather more country data, we hope to encounter patterns in social media post across borders leading to a better understanding'
+                                       'of what makes a succesful distance learning program whether it be distributed by television, online, radio or any other method currently in use.'),
+                                html.Br(),
+                                html.H5('Developer'),
+                                html.P('This project was developed for UNICEF by Annika Squires')
+
+                                ]),
+
                 ),
+                dbc.ModalFooter(
+                    dbc.Button(
+                        "Close", id="close-backdrop", className="ml-auto"
+                    )
+                ),
+            ],
+            id="modal-backdrop",
+            scrollable=True,
+
+        ),
+
+
+
 
         ]),
 
@@ -82,7 +120,7 @@ app.layout = html.Div(
                                                                  options=[
                                                                      {'label': 'United States', 'value': 'US'},
                                                                      {'label': 'China', 'value': 'CHN'},
-                                                                     {'label': 'Nigeria','value':'Nigeria'},
+                                                                     {'label': 'Nigeria', 'value': 'Nigeria'},
                                                                  ],
                                                                  value='US',
                                                                  style={'height': '35px', 'position': 'relative',
@@ -141,10 +179,10 @@ app.layout = html.Div(
                                                  ], fluid=True)
                                              ])
                                          ])
-                            ], style={'backgroundColor': '#252e3f', 'height': '650px',  # 'fontFamily': 'HelveticaNeue',
+                            ], style={'backgroundColor': '#252e3f', 'height': '100rem',  # 'fontFamily': 'HelveticaNeue',
                                       'fontColor': '#7fafdf'},
 
-                            ), style={'backgroundColor': '#252e3f', 'height': '690px', 'margin-left': '5%'}),
+                            ), style={'backgroundColor': '#252e3f', 'height': '100rem', 'margin-left': '5%'}),
 
                     ]),
 
@@ -207,23 +245,27 @@ app.layout = html.Div(
                                 # dbc.Tab(
                                 # dcc.Graph(id='bigrams', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                                 # label='Bigrams'),
-                                dbc.Tab(html.Iframe(
+                                dbc.Tab(html.Iframe(className='container',
                                     id='nodes_1',
-                                    src=None, width='100%',style={'height':'100rem'}),
-                                    label="nodes"),
-                               
+                                    src=None, width='100%'), #),
+                                    label="Nodes"),
+
                                 dbc.Tab(html.Div([
                                     html.Br(),
+
+                                    html.H5('Term Based Network Analysis'),
+                                    html.P('Explore terms that relate to your chosen countries distance learning methods. Click terms (nodes) to see word relationships (edges)'),
+                                    html.Br(),
                                     html.Iframe(
-                                    id='co-oc',
-                                    src=None, width='100%',style={'height':'100rem'})]),
+                                        id='co-oc',
+                                        src=None, width='100%', style={'height': '100rem'})]),
                                     label="Network", style=dict(border=33)),
 
                                 # dbc.Tab( html.Img(
                                 # src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
                                 dbc.Tab(html.Iframe(
                                     id='sentiment',
-                                    src=None, width='100%', style={'height':'100rem'}),
+                                    src=None, width='100%', style={'height': '100rem'}),
                                     label="Sentiment", style=dict(border=33)),
 
                             ]),
@@ -249,28 +291,28 @@ app.layout = html.Div(
 
                 ]
             ), html.Div(
-        [
-            html.H4('Acknowledgements and Data Sources',
-                    style={"margin-top": "0"}),
-            dcc.Markdown('''\
+                [
+                    html.H4('Acknowledgements and Data Sources',
+                            style={"margin-top": "0"}),
+                    dcc.Markdown('''\
 **Important Data Caveats:**  Due to anonymized data, access to individual tweets is not available. See [FAQ](https://github.com/asquires11/un) for details.
-- Special Thanks to Polly Zhang for doing the computing and analysis of the China data
+-Special Thanks to Polly Zheng for doing the computing and analysis of the China data
 - Text data used with permission from Twitter and Weibo, [Twitter](https://www.twitter.com/).
 - Text analysis used Quanteda [Quanteda]
 - Network Correlation developed with [visNetwork](https://datastorm-open.github.io/visNetwork/).
 - Dashboard developed with [Plot.ly Dash](https://plotly.com/dash/).
 - For source code and data workflow, please contact [Annika Squires](annikasquires@icloud.com).
 '''),
-        ],
-        style={
-            'width': '98%',
-            'margin-right': '0',
-            'padding': '10px',
-        },
-        className='twelve columns pretty_container',
-    ),
+                ],
+                style={
+                    'width': '98%',
+                    'margin-right': '0',
+                    'padding': '10px',
+                },
+                className='twelve columns pretty_container',
+            ),
         ]
-       ),
+        ),
 
     ],
     style={'backgroundColor': '#1f2630', 'width': '100%', 'height': '900px'}
@@ -312,18 +354,18 @@ def update_graph(value):
                                 size=12,
                                 color='#7fafdf'), xaxis_title='Date',
                       yaxis_title='Compound Sentiment Score',
-                       annotations=[
+                      annotations=[
                           go.layout.Annotation(
                               x=0,
                               y=-.2,
                               showarrow=False,
-                              text="<br>Source: Twitter",
+                              text="<br>Data: Twitter",
                               xref="paper",
                               yref="paper",
                               textangle=0
                           )],
-                     
-                     )
+
+                      )
 
     return fig
 
@@ -375,24 +417,26 @@ def update_graph(value, number_dropdown):
                                          color='#7fafdf', size=14))
         fig_3.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
                            tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
-
         fig_3.update_layout(margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
-                            paper_bgcolor='#1f2630', title_text='Top Bigram Occurence', title_x=0.5,
-                            font=dict(family='Helvetica Neue',
+                            paper_bgcolor='#1f2630',
+                            title_text='Top Bigram Occurence <br> <sup>Bigrams are 2 consecutive words in a sentence. This'
+                                       ' plot represents the most commonly occcuring bigrams from all social media posts <sup>',
+
+        font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
                             yaxis_title='Frequency',
                             annotations=[
-                          go.layout.Annotation(
-                              x=0,
-                              y=-.3,
-                              showarrow=False,
-                              text="<br>Source: Twitter",
-                              xref="paper",
-                              yref="paper",
-                              textangle=0
-                          )],
-                           )
+                                go.layout.Annotation(
+                                    x=0,
+                                    y=-.3,
+                                    showarrow=False,
+                                    text="<br>Data: Twitter",
+                                    xref="paper",
+                                    yref="paper",
+                                    textangle=0
+                                )],
+                            )
 
     if number_dropdown == 20:
         fig_3 = px.bar(df6[:20], x='Name', y='weight', title='Counts of top bigrams',
@@ -406,24 +450,26 @@ def update_graph(value, number_dropdown):
                                          color='#7fafdf', size=14))
         fig_3.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
                            tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
-
         fig_3.update_layout(margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
-                            paper_bgcolor='#1f2630', title_text='Top Bigram Occurence', title_x=0.5,
-                            font=dict(family='Helvetica Neue',
+                            paper_bgcolor='#1f2630',
+                            title_text='Top Bigram Occurence <br> <sup>Bigrams are 2 consecutive words in a sentence. This'
+                                       ' plot represents the most commonly occcuring bigrams from all social media posts <sup>',
+
+        font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
                             yaxis_title='Frequency',
                             annotations=[
-                          go.layout.Annotation(
-                              x=0,
-                              y=-.3,
-                              showarrow=False,
-                              text="<br>Source: Twitter",
-                              xref="paper",
-                              yref="paper",
-                              textangle=0
-                          )],
-                           )
+                                go.layout.Annotation(
+                                    x=0,
+                                    y=-.3,
+                                    showarrow=False,
+                                    text="<br>Data: Twitter",
+                                    xref="paper",
+                                    yref="paper",
+                                    textangle=0
+                                )],
+                            )
 
     if number_dropdown == 30:
         fig_3 = px.bar(df6[:30], x='Name', y='weight', title='Counts of top bigrams',
@@ -439,22 +485,25 @@ def update_graph(value, number_dropdown):
                            tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
 
         fig_3.update_layout(margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
-                            paper_bgcolor='#1f2630', title_text='Top Bigram Occurence', title_x=0.5,
+                            paper_bgcolor='#1f2630',
+                            title_text='Top Bigram Occurence <br> <sup>Bigrams are 2 consecutive words in a sentence. This'
+                                       ' plot represents the most commonly occcuring bigrams from all social media posts <sup>',
+        #title_x=0.5,
                             font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
                             yaxis_title='Frequency',
                             annotations=[
-                          go.layout.Annotation(
-                              x=0,
-                              y=-1,
-                              showarrow=False,
-                              text="<br>Source: Twitter",
-                              xref="paper",
-                              yref="paper",
-                              textangle=0
-                          )],
-                           )
+                                go.layout.Annotation(
+                                    x=0,
+                                    y=-1,
+                                    showarrow=False,
+                                    text="<br>Data: Twitter",
+                                    xref="paper",
+                                    yref="paper",
+                                    textangle=0
+                                )],
+                            )
 
     if number_dropdown == 40:
         fig_3 = px.bar(df6[:40], x='Name', y='weight', title='Counts of top bigrams',
@@ -470,22 +519,27 @@ def update_graph(value, number_dropdown):
                            tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
 
         fig_3.update_layout(margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
-                            paper_bgcolor='#1f2630', title_text='Top Bigram Occurence', title_x=0.5,
+                            paper_bgcolor='#1f2630', title_text='Top Bigram Occurence <br> <sup>Bigrams are 2 consecutive words in a sentence. This'
+                                                                ' plot represents the most commonly occcuring bigrams from all social media posts <sup>'
+
+
+
+                                                                , #title_x=0.5,
                             font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
                             yaxis_title='Frequency',
-                           annotations=[
-                          go.layout.Annotation(
-                              x=0,
-                              y=-1.2,
-                              showarrow=False,
-                              text="<br>Source: Twitter",
-                              xref="paper",
-                              yref="paper",
-                              textangle=0
-                          )],
-                           )
+                            annotations=[
+                                go.layout.Annotation(
+                                    x=0,
+                                    y=-1.2,
+                                    showarrow=False,
+                                    text="<br>Data: Twitter",
+                                    xref="paper",
+                                    yref="paper",
+                                    textangle=0
+                                )],
+                            )
 
     # fig_3.add_annotation(x=0, y=0.85, xanchor='left', yanchor='bottom',
     #    xref='paper', yref='paper', showarrow=False, align='left',
@@ -502,40 +556,55 @@ def display_table(Country):
     dff_3 = dff_3.iloc[:, :2]
 
     return dff_3.to_dict('records')
-   
-   
+
 
 @app.callback(Output('nodes_1', 'src'),
-                 [Input('demo-dropdown', 'value')])
+              [Input('demo-dropdown', 'value')])
 def change_video(option):
-       if option == 'US':
-           return 'assets/node_test_2.html'
-       if option == 'Nigeria':
-           return 'assets/nigeria_node_test.html'
-       else:
-           return 'https://www.youtube.com/embed/ALZHF5UqnU4'
+    if option == 'US':
+        return 'assets/node_test_2.html'
+    if option == 'Nigeria':
+        return 'assets/nigeria_node_test.html'
+    else:
+        return 'https://www.youtube.com/embed/ALZHF5UqnU4'
 
 
 @app.callback(Output('co-oc', 'src'),
-                 [Input('demo-dropdown', 'value')])
+              [Input('demo-dropdown', 'value')])
 def change_video(option):
-       if option == 'US':
-           return 'assets/yay.html'
-       if option == 'Nigeria':
-           return 'assets/yay_nigeria.html'
-       else:
-           return 'https://www.youtube.com/embed/ALZHF5UqnU4'
-         
-@app.callback(Output('sentiment', 'src'),
-                 [Input('demo-dropdown', 'value')])
-def change_video(option):
-       if option == 'US':
-           return 'assets/Us_emotion.html'
-       if option == 'Nigeria':
-           return 'assets/Nigeria_emotion.html'
-       else:
-           return 'https://www.youtube.com/embed/ALZHF5UqnU4'
+    if option == 'US':
+        return 'assets/yay.html'
+    if option == 'Nigeria':
+        return 'assets/yay_nigeria.html'
+    else:
+        return 'https://www.youtube.com/embed/ALZHF5UqnU4'
 
+
+@app.callback(Output('sentiment', 'src'),
+              [Input('demo-dropdown', 'value')])
+def change_video(option):
+    if option == 'US':
+        return 'assets/Us_emotion.html'
+    if option == 'Nigeria':
+        return 'assets/Nigeria_emotion.html'
+    else:
+        return 'https://www.youtube.com/embed/ALZHF5UqnU4'
+
+@app.callback(
+    Output("modal-backdrop", "backdrop"), [Input("backdrop-selector", "value")]
+    )
+def select_backdrop(backdrop):
+    return backdrop
+
+@app.callback(
+        Output("modal-backdrop", "is_open"),
+        [Input("open-backdrop", "n_clicks"), Input("close-backdrop", "n_clicks")],
+        [State("modal-backdrop", "is_open")],
+    )
+def toggle_modal(n1, n2, is_open):
+    if n1 or n2:
+        return not is_open
+    return is_open
 
 
 # run app
