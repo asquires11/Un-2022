@@ -41,10 +41,10 @@ app.layout = html.Div(id='root',
     children=[
         html.Div(className='header',children=[
             html.Br(),
-            html.A([(dbc.Button("About", id="open-backdrop", style={'margin-left': '1300px'})),
+            html.A([(dbc.Button("About",className='button', id="open-backdrop", style={'margin-left': '1300px'})),
                     dbc.Col([html.H4('COVID-19 AND EDUCATION',
 
-                                     style={'color': '#7fafdf', 'margin-left': '5%'}, className='app-header--title'),
+                                     style={'color': '#7fafdf'}, className='app-header--title'),
                              html.P(
                                  id="description",
 
@@ -60,13 +60,11 @@ app.layout = html.Div(id='root',
                 [
                     dbc.ModalHeader("About this project"),
                     dbc.ModalBody(
-                        html.Div([html.P(
-                            'This project is intended to study the social media sentiment from diffent countries on education during COVID-19. The initial social media data'
-                            'were acquired from both Twitter and Weibo. '),
+                        html.Div([
                                   html.H5('Motivation'),
                                   html.P(
-                                      'The research objective was to understand how parents,students,teachers and schools felt about their countries implementation of distance learning, as well as examining the challenges and triumphs discussed on social media'
-                                      'that have appeared on social media sites during the pandemic. As we gather more country data, we hope to encounter patterns in social media post across borders leading to a better understanding'
+                                      'The research objective was to understand how parents,students,teachers,and schools felt about their countries implementation of distance learning, as well as examining the everyday challenges and triumphs of education discussed on social media'
+                                      ' during the pandemic. As we gather more country data, we hope to encounter patterns in social media post across borders leading to a better understanding'
                                       'of what makes a succesful distance learning program whether it be distributed by television, online, radio or any other method currently in use.'),
                                   html.Br(),
                                   html.H5('Developer'),
@@ -239,6 +237,8 @@ app.layout = html.Div(id='root',
                                 # label='Bigrams'),
                                 dbc.Tab(html.Div([
                                     html.Br(),
+                                    html.H5('Cocccurence Network'),
+                                    html.P('Explore how connected words have appeared in social media post from your country of choice'),
 
                                     html.Iframe(
                                                     id='nodes_1',
