@@ -1,9 +1,10 @@
+
 import dash
 import dash_bootstrap_components as dbc
 import dash_html_components as html
 import plotly.graph_objects as go
 import dash_core_components as dcc
-from dash.dependencies import Input, Output,State
+from dash.dependencies import Input, Output, State
 import pandas as pd
 import plotly.express as px
 import numpy as np
@@ -36,70 +37,67 @@ states = top_hashtag.Country.unique().tolist()
 # _________________________________________________
 
 
-app.layout = html.Div(
+app.layout = html.Div(id='root',
     children=[
-        html.Div([
+        html.Div(className='header',children=[
             html.Br(),
-html.A( [(dbc.Button("About", id="open-backdrop",style={'margin-left' :'1300px'})),
-dbc.Col([ html.H4('COVID-19 AND EDUCATION',
+            html.A([(dbc.Button("About", id="open-backdrop", style={'margin-left': '1300px'})),
+                    dbc.Col([html.H4('COVID-19 AND EDUCATION',
 
-                    style={'color': '#7fafdf', 'margin-left': '5%'}, className='app-header--title'),
-            html.P(
-                id="description",
+                                     style={'color': '#7fafdf', 'margin-left': '5%'}, className='app-header--title'),
+                             html.P(
+                                 id="description",
 
-                children='This project is intended to study the social media sentiment \
+                                 children='This project is intended to study the social media sentiment \
                 from diffent countries on education during COVID-19. The initial social media data\
                 were acquired from both Twitter and Weibo. ',
 
+                             ),
+
+                             ]),
+
+                    ]), dbc.Modal(
+                [
+                    dbc.ModalHeader("About this project"),
+                    dbc.ModalBody(
+                        html.Div([html.P(
+                            'This project is intended to study the social media sentiment from diffent countries on education during COVID-19. The initial social media data'
+                            'were acquired from both Twitter and Weibo. '),
+                                  html.H5('Motivation'),
+                                  html.P(
+                                      'The research objective was to understand how parents,students,teachers and schools felt about their countries implementation of distance learning, as well as examining the challenges and triumphs discussed on social media'
+                                      'that have appeared on social media sites during the pandemic. As we gather more country data, we hope to encounter patterns in social media post across borders leading to a better understanding'
+                                      'of what makes a succesful distance learning program whether it be distributed by television, online, radio or any other method currently in use.'),
+                                  html.Br(),
+                                  html.H5('Developer'),
+                                  html.P('This project was developed for UNICEF by Annika Squires')
+
+                                  ]),
+
+                    ),
+                    dbc.ModalFooter(
+                        dbc.Button(
+                            "Close", id="close-backdrop", className="ml-auto"
+                        )
+                    ),
+                ],
+                id="modal-backdrop",
+                scrollable=True,
+
             ),
-
-                      ]),
-
-
-
-]),dbc.Modal(
-            [
-                dbc.ModalHeader("About this project"),
-                dbc.ModalBody(
-                    html.Div([  html.P('This project is intended to study the social media sentiment from diffent countries on education during COVID-19. The initial social media data'
-                                       'were acquired from both Twitter and Weibo. '),
-                                html.H5('Motivation'),
-                                html.P('The research objective was to understand how parents,students,teachers and schools felt about their countries implementation of distance learning, as well as examining the challenges and triumphs discussed on social media'
-                                       'that have appeared on social media sites during the pandemic. As we gather more country data, we hope to encounter patterns in social media post across borders leading to a better understanding'
-                                       'of what makes a succesful distance learning program whether it be distributed by television, online, radio or any other method currently in use.'),
-                                html.Br(),
-                                html.H5('Developer'),
-                                html.P('This project was developed for UNICEF by Annika Squires')
-
-                                ]),
-
-                ),
-                dbc.ModalFooter(
-                    dbc.Button(
-                        "Close", id="close-backdrop", className="ml-auto"
-                    )
-                ),
-            ],
-            id="modal-backdrop",
-            scrollable=True,
-
-        ),
-
-
-
 
         ]),
 
         html.Br(),
 
-        html.Div([
+        html.Div(children=[
             dbc.Row(
                 [
 
-                    dbc.Col(md=3, children=[
+                    dbc.Col(children=[
 
                         dbc.Card(
-                            dbc.CardBody([
+                            dbc.CardBody(className='left-column', children=[
                                 dbc.Tabs(id="tabs", active_tab="tab_1",
 
                                          children=[
@@ -119,7 +117,7 @@ dbc.Col([ html.H4('COVID-19 AND EDUCATION',
                                                                  id='demo-dropdown',
                                                                  options=[
                                                                      {'label': 'United States', 'value': 'US'},
-                                                                     {'label': 'China', 'value': 'CHN'},
+                                                                     #{'label': 'China', 'value': 'CHN'},
                                                                      {'label': 'Nigeria', 'value': 'Nigeria'},
                                                                  ],
                                                                  value='US',
@@ -179,29 +177,23 @@ dbc.Col([ html.H4('COVID-19 AND EDUCATION',
                                                  ], fluid=True)
                                              ])
                                          ])
-                            ], style={'backgroundColor': '#252e3f', 'height': '100rem',  # 'fontFamily': 'HelveticaNeue',
+                            ], style={'backgroundColor': '#252e3f','height': '99rem',
+
                                       'fontColor': '#7fafdf'},
 
-                            ), style={'backgroundColor': '#252e3f', 'height': '100rem', 'margin-left': '5%'}),
+                            ), style={'backgroundColor': '#252e3f'})
 
-                    ]),
+                    ],md=3),
 
-                    dbc.Col(html.Div(dbc.Card(
+                    dbc.Col(html.Div(className='heatmap-container', children=dbc.Card(
                         dbc.CardBody([
 
-                            # html.Img(
-                            # src=app.get_asset_url("Rplot03.png"),),
-                            # html.Br(),
 
-                            # dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
-
-                            # html.Br(),
 
                             dbc.Tabs(className="nav nav-pills", children=[
 
                                 dbc.Tab(tab_id="tab_4", label="Bigrams",
-                                        style={  # 'fontFamily': 'Helvetica Neue',
-                                            'color': "#7fafdf"},
+                                        style={'height': '90rem'},
                                         children=[
                                             dbc.Container([
                                                 html.Br(),
@@ -229,44 +221,51 @@ dbc.Col([ html.H4('COVID-19 AND EDUCATION',
                                                 html.Br(),
 
                                                 dcc.Graph(id='bigrams',
-                                                          style={'backgroundColor': '#fdfe2', 'height': '485px'}),
+                                                          style={'backgroundColor': '#fdfe2','height': '75rem'}),
 
-                                            ], style={'color': '#1f2630'}, fluid=True),
-                                        ]),
+                                            ], fluid=True),
+                                        ],),
 
                                 dbc.Tab(label="Dates",
                                         children=[
 
                                             html.Br(),
                                             dcc.Graph(id="sentiment-dates",
-                                                      style={'backgroundColor': '#fdfe2', 'height': '650px'}),
+                                                      style={'height': '88rem'} ),
                                         ],
-                                        ),
+                                        style={'height': '90rem'}),
                                 # dbc.Tab(
                                 # dcc.Graph(id='bigrams', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
                                 # label='Bigrams'),
-                                dbc.Tab(html.Iframe(className='container',
-                                    id='nodes_1',
-                                    src=None, width='100%'), #),
-                                    label="Nodes"),
+                                dbc.Tab(html.Div([
+                                    html.Br(),
+
+                                    html.Iframe(
+                                                    id='nodes_1',
+                                                    src=None, width='100%',style={'height': '90rem'}),  # ),
+
+
+
+                               ]),  label="Nodes",style={'height': '90rem'}, ),
 
                                 dbc.Tab(html.Div([
                                     html.Br(),
 
                                     html.H5('Term Based Network Analysis'),
-                                    html.P('Explore terms that relate to your chosen countries distance learning methods. Click terms (nodes) to see word relationships (edges)'),
+                                    html.P(
+                                        'Explore terms that relate to your chosen countries distance learning methods. Click terms (nodes) to see word relationships (edges),zoom in to get a better look at the nodes'),
                                     html.Br(),
                                     html.Iframe(
                                         id='co-oc',
-                                        src=None, width='100%', style={'height': '100rem'})]),
-                                    label="Network", style=dict(border=33)),
+                                        src=None, width='100%',style={'height': '80rem'})]),
+                                    label="Network", style={'height': '90rem'}),
 
                                 # dbc.Tab( html.Img(
                                 # src=app.get_asset_url('Rplot06.png'),style={'backgroundColor': '#fdfe2', 'height': '650px','width':'1050px'}),style={'backgroundColor': '#fdfe2', 'height': '650px'}, label="Sentiment")
                                 dbc.Tab(html.Iframe(
                                     id='sentiment',
-                                    src=None, width='100%', style={'height': '100rem'}),
-                                    label="Sentiment", style=dict(border=33)),
+                                    src=None, width='100%',style={'height': '90rem'}),
+                                    label="Sentiment", style={'height': '90rem'}),
 
                             ]),
 
@@ -287,7 +286,7 @@ dbc.Col([ html.H4('COVID-19 AND EDUCATION',
 
                         ]), style={'backgroundColor': '#252e3f'}
 
-                    )), md=9),
+                    ))),
 
                 ]
             ), html.Div(
@@ -348,7 +347,7 @@ def update_graph(value):
     #  xref='paper', yref='paper', showarrow=False, align='left',
     #  bgcolor='rgba(0, 0,0,0)')
 
-    fig.update_layout(margin={'l': 100, 'b': 100, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
+    fig.update_layout(margin={'l': 100, 'b': 250, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
                       paper_bgcolor='#1f2630', title_text='Compound Sentiment of Tweets by Date', title_x=0.5,
                       font=dict(family='Helvetica Neue',
                                 size=12,
@@ -357,7 +356,7 @@ def update_graph(value):
                       annotations=[
                           go.layout.Annotation(
                               x=0,
-                              y=-.2,
+                              y=-1.2,
                               showarrow=False,
                               text="<br>Data: Twitter",
                               xref="paper",
@@ -417,12 +416,12 @@ def update_graph(value, number_dropdown):
                                          color='#7fafdf', size=14))
         fig_3.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
                            tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
-        fig_3.update_layout(margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
+        fig_3.update_layout(margin={'l': 100, 'b':130, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
                             paper_bgcolor='#1f2630',
                             title_text='Top Bigram Occurence <br> <sup>Bigrams are 2 consecutive words in a sentence. This'
                                        ' plot represents the most commonly occcuring bigrams from all social media posts <sup>',
 
-        font=dict(family='Helvetica Neue',
+                            font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
                             yaxis_title='Frequency',
@@ -431,7 +430,7 @@ def update_graph(value, number_dropdown):
                                     x=0,
                                     y=-.3,
                                     showarrow=False,
-                                    text="<br>Data: Twitter",
+                                    text="<br> Data: Twitter",
                                     xref="paper",
                                     yref="paper",
                                     textangle=0
@@ -450,12 +449,12 @@ def update_graph(value, number_dropdown):
                                          color='#7fafdf', size=14))
         fig_3.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
                            tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
-        fig_3.update_layout(margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
+        fig_3.update_layout(margin={'l': 100, 'b': 150, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
                             paper_bgcolor='#1f2630',
                             title_text='Top Bigram Occurence <br> <sup>Bigrams are 2 consecutive words in a sentence. This'
                                        ' plot represents the most commonly occcuring bigrams from all social media posts <sup>',
 
-        font=dict(family='Helvetica Neue',
+                            font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
                             yaxis_title='Frequency',
@@ -484,11 +483,11 @@ def update_graph(value, number_dropdown):
         fig_3.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
                            tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
 
-        fig_3.update_layout(margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
+        fig_3.update_layout(margin={'l': 100, 'b': 290, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
                             paper_bgcolor='#1f2630',
                             title_text='Top Bigram Occurence <br> <sup>Bigrams are 2 consecutive words in a sentence. This'
                                        ' plot represents the most commonly occcuring bigrams from all social media posts <sup>',
-        #title_x=0.5,
+                            # title_x=0.5,
                             font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
@@ -518,13 +517,12 @@ def update_graph(value, number_dropdown):
         fig_3.update_yaxes(showgrid=True, gridcolor='#5b5b5b',
                            tickfont=dict(family='Helvetica Neue', color='#7fafdf', size=14))
 
-        fig_3.update_layout(margin={'l': 100, 'b': 50, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
-                            paper_bgcolor='#1f2630', title_text='Top Bigram Occurence <br> <sup>Bigrams are 2 consecutive words in a sentence. This'
-                                                                ' plot represents the most commonly occcuring bigrams from all social media posts <sup>'
+        fig_3.update_layout(margin={'l': 100, 'b': 330, 'r': 10, 't': 100}, plot_bgcolor='#1f2630',
+                            paper_bgcolor='#1f2630',
+                            title_text='Top Bigram Occurence <br> <sup>Bigrams are 2 consecutive words in a sentence. This'
+                                       ' plot represents the most commonly occcuring bigrams from all social media posts <sup>'
 
-
-
-                                                                , #title_x=0.5,
+                            ,  # title_x=0.5,
                             font=dict(family='Helvetica Neue',
                                       size=12,
                                       color='#7fafdf'), xaxis_title='Bigram',
@@ -532,7 +530,7 @@ def update_graph(value, number_dropdown):
                             annotations=[
                                 go.layout.Annotation(
                                     x=0,
-                                    y=-1.2,
+                                    y=-1.5,
                                     showarrow=False,
                                     text="<br>Data: Twitter",
                                     xref="paper",
@@ -590,17 +588,19 @@ def change_video(option):
     else:
         return 'https://www.youtube.com/embed/ALZHF5UqnU4'
 
+
 @app.callback(
     Output("modal-backdrop", "backdrop"), [Input("backdrop-selector", "value")]
-    )
+)
 def select_backdrop(backdrop):
     return backdrop
 
+
 @app.callback(
-        Output("modal-backdrop", "is_open"),
-        [Input("open-backdrop", "n_clicks"), Input("close-backdrop", "n_clicks")],
-        [State("modal-backdrop", "is_open")],
-    )
+    Output("modal-backdrop", "is_open"),
+    [Input("open-backdrop", "n_clicks"), Input("close-backdrop", "n_clicks")],
+    [State("modal-backdrop", "is_open")],
+)
 def toggle_modal(n1, n2, is_open):
     if n1 or n2:
         return not is_open
