@@ -532,7 +532,7 @@ def change_video(option):
        if option == 'US':
            return 'assets/Us_emotion.html'
        if option == 'Nigeria':
-           return 'assets/test_plot_nigeria.html'
+           return 'assets/Nigeria_emotion.html'
        else:
            return 'https://www.youtube.com/embed/ALZHF5UqnU4'
 
