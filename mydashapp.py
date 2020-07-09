@@ -244,7 +244,7 @@ html.H4('COVID-19 AND EDUCATION',
                                 # label='Bigrams'),
                                 dbc.Tab(html.Div([
                                     html.Br(),
-                                    html.H5('Cocccurence Network'),
+                                    html.H5('Co-occurence Network'),
                                     html.P('Explore how connected words have appeared in social media post from your country of choice'),
 
                                     html.Iframe(
