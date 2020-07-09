@@ -39,22 +39,11 @@ states = top_hashtag.Country.unique().tolist()
 
 app.layout = html.Div(id='root',
     children=[
-        html.Div(className='header',children=[
-            html.Br(),
-            html.A([(dbc.Button("About",className='button', id="open-backdrop", style={'margin-left': '1300px'})),
-                    dbc.Col([html.H4('COVID-19 AND EDUCATION',
+        html.Div(id='header',children=[
+html.A([(dbc.Button("About",className='button', id="open-backdrop")),
 
-                                     style={'color': '#7fafdf'}, className='app-header--title'),
-                             html.P(
-                                 id="description",
 
-                                 children='This project is intended to study the social media sentiment \
-                from diffent countries on education during COVID-19. The initial social media data\
-                were acquired from both Twitter and Weibo. ',
 
-                             ),
-
-                             ]),
 
                     ]), dbc.Modal(
                 [
@@ -83,6 +72,24 @@ app.layout = html.Div(id='root',
                 scrollable=True,
 
             ),
+            html.Img(id='logo',src=app.get_asset_url("UNICEF_logo_2016.png")),
+
+html.H4('COVID-19 AND EDUCATION',
+
+                                     style={'color': '#7fafdf'}, className='app-header--title'),
+                             html.P(
+                                 id="description",
+
+                                 children='This project uses Natural Language Processing (NLP) to study the social media sentiment \
+                on education during COVID-19. Our inital focus is on the United States and Nigeria with social media data\
+                acquired from Twitter. Click around to explore the results from more than 20,000 social media posts\
+                discussing distance learning between March 16,2020 and June 06,2020.'
+                                        ,
+
+                             ),
+
+            html.Br(),
+
 
         ]),
 
