@@ -530,7 +530,7 @@ def change_video(option):
                  [Input('demo-dropdown', 'value')])
 def change_video(option):
        if option == 'US':
-           return 'assets/test_plot_Us.html'
+           return 'assets/Us_emotion.html'
        if option == 'Nigeria':
            return 'assets/test_plot_nigeria.html'
        else:
