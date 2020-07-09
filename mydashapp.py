@@ -253,7 +253,7 @@ app.layout = html.Div(id='root',
 
                                     html.H5('Term Based Network Analysis'),
                                     html.P(
-                                        'Explore terms that relate to your chosen countries distance learning methods. Click terms (nodes) to see word relationships (edges),zoom in to get a better look at the nodes'),
+                                        'Explore terms that relate to your chosen countries distance learning methods. Click terms (nodes) and zoom in to see word relationships (edges).'),
                                     html.Br(),
                                     html.Iframe(
                                         id='co-oc',
@@ -269,19 +269,11 @@ app.layout = html.Div(id='root',
 
                             ]),
 
-                            # dcc.Graph(id='sentiment-dates', style={'backgroundColor': '#fdfe2', 'height': '650px'}),
+
                             html.Br(),
                             html.Div(
 
-                                # children=[
-                                # dcc.Dropdown(
-                                #   id='filter_dropdown',
-                                #  options=[{'label':st, 'value':st} for st in states],
-                                #  value = states[0]
-                                #  ),
-                                #  dt.DataTable(id='table-container', columns=[{'id': c, 'name': c} for c in top_hashtag.columns.values],style_table=dict(overflowX='auto', minWidth='100%',style_cell={'minWidth': '5px', 'width': '8px', 'maxWidth': '10px','height': 'auto',  'color': '#7fafdf','backgroundColor':'#1f2630','textAlign':'center',
-                                # 'fontFamily':'Helvetica Neue'}))
-                                # ]
+
                             ),
 
                         ]), style={'backgroundColor': '#252e3f'}
@@ -292,7 +284,7 @@ app.layout = html.Div(id='root',
             ), html.Div(
                 [
                     html.H4('Acknowledgements and Data Sources',
-                            style={"margin-top": "0"}),
+                            style={"margin-top": "0", 'backgroundColor': '#1f2630'}),
                     dcc.Markdown('''\
 **Important Data Caveats:**  Due to anonymized data, access to individual tweets is not available. See [FAQ](https://github.com/asquires11/un) for details.
 -Special Thanks to Polly Zheng for doing the computing and analysis of the China data
@@ -307,11 +299,12 @@ app.layout = html.Div(id='root',
                     'width': '98%',
                     'margin-right': '0',
                     'padding': '10px',
+                    'backgroundColor': '#1f2630'
                 },
                 className='twelve columns pretty_container',
             ),
-        ]
-        ),
+        ],
+        style={'backgroundColor': '#1f2630', 'width': '100%', 'height': '900px'}),
 
     ],
     style={'backgroundColor': '#1f2630', 'width': '100%', 'height': '900px'}
