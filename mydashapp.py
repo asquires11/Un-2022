@@ -254,7 +254,7 @@ app.layout = html.Div(
                     style={"margin-top": "0"}),
             dcc.Markdown('''\
 **Important Data Caveats:**  Due to anonymized data, access to individual tweets is not available. See [FAQ](https://github.com/asquires11/un) for details.
-_ Special Thanks to Moxuan Zhang for doing the computing and analysis of the China data
+- Special Thanks to Polly Zhang for doing the computing and analysis of the China data
 - Text data used with permission from Twitter and Weibo, [Twitter](https://www.twitter.com/).
 - Text analysis used Quanteda [Quanteda]
 - Network Correlation developed with [visNetwork](https://datastorm-open.github.io/visNetwork/).
